@@ -41,6 +41,9 @@ function App() {
         <Button type="dashed">Click me</Button>
         <Button type="text">Click me</Button>
         <Button type="link">Click me</Button>
+        <Layout>
+      <Header></Header>
+        </Layout>
       </div>
 
       <Toaster />
