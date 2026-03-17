@@ -1,4 +1,20 @@
 {
-  "products": [],
+  "stories": [
+    {
+      "title": "nguuu",
+      "author": "bảo toàn",
+      "image": "https://images.unsplash.com/photo-1606312618473-e3c0d3d38be3",
+      "description": "sấdasd",
+      "id": 1
+    },
+    {
+      "title": "nguuu",
+      "author": "bảo toàn",
+      "image": "https://images.unsplash.com/photo-1606312618473-e3c0d3d38be3",
+      "description": "sấdasd",
+      "id": 2
+    }
+  ],
+  "categories": [],
   "users": []
 }

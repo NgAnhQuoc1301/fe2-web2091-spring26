@@ -3,6 +3,7 @@ import { Link, Routes, Route } from "react-router-dom";
 import { Button, Form, Input } from "antd";
 import Layout, { Content, Footer, Header } from "antd/es/layout/layout";
 import Dashboard from "./dashboard";
+import Lab4 from "./pages/lab4";
 
 function App() {
   const onFinish = (values: any) =>{
@@ -71,6 +72,7 @@ function App() {
           </div>
         } />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/add" element={<Lab4 />} />
       </Routes>
 
       <Toaster />
