@@ -15,6 +15,17 @@
       "id": 2
     }
   ],
-  "categories": [],
+  "categories": [
+    {
+      "title": "truyện kinh dị",
+      "description": "adsdasdas",
+      "id": 1
+    },
+    {
+      "title": "ưqedwqe",
+      "description": "sadasdas",
+      "id": 2
+    }
+  ],
   "users": []
 }
