@@ -91,7 +91,6 @@ export default function Lab5() {
                 return category ? category.title : "N/A";
             }
         },
-        // Bài 1: Hiển thị cột Created At
         {
             title: "Created At",
             dataIndex: "createdAt",
@@ -101,7 +100,6 @@ export default function Lab5() {
                 return new Date(date).toLocaleDateString("vi-VN");
             }
         },
-        // Bài 2: Thêm cột Action (Xóa)
         {
             title: "Action",
             key: "action",
@@ -128,7 +126,6 @@ export default function Lab5() {
         <div style={{ padding: "20px" }}>
             <h1>Danh sách truyện</h1>
 
-            {/* Bài 5: Tìm kiếm truyện */}
             <div style={{ marginBottom: "20px" }}>
                 <Input
                     placeholder="Tìm kiếm theo tên truyện..."
@@ -143,7 +140,6 @@ export default function Lab5() {
                     columns={columns}
                     dataSource={filteredStories}
                     rowKey="id"
-                    // Bài 3: Thêm phân trang
                     pagination={{ pageSize: 5, showTotal: (total) => `Tổng ${total} truyện` }}
                 />
             ) : (
