@@ -13,6 +13,22 @@
       "image": "https://images.unsplash.com/photo-1606312618473-e3c0d3d38be3",
       "description": "sấdasd",
       "id": 2
+    },
+    {
+      "title": "ádsadasd",
+      "author": "đâsdas",
+      "image": "https://images.unsplash.com/photo-1606312618473-e3c0d3d38be3",
+      "description": "ádasdasd",
+      "categoryId": 1,
+      "id": 3
+    },
+    {
+      "title": "ewwerwe",
+      "author": "rưerwer",
+      "image": "https://www.thegioididong.com/tin-tuc/cach-giu-nguyen-chat-luong-anh-khi-su-dung-lam-hinh-nen-939425",
+      "description": "ưerewr",
+      "categoryId": 3,
+      "id": 4
     }
   ],
   "categories": [
@@ -25,6 +41,18 @@
       "title": "ưqedwqe",
       "description": "sadasdas",
       "id": 2
+    },
+    {
+      "title": "gà",
+      "description": "adsadasd",
+      "active": true,
+      "id": 3
+    },
+    {
+      "title": "ưerfwef",
+      "description": "ưerewr",
+      "active": true,
+      "id": 4
     }
   ],
   "users": []

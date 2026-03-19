@@ -71,6 +71,7 @@ function App() {
             </Form>
           </div>
         } />
+        <Route path="/list" element={<Lab4 />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/add" element={<Lab4 />} />
       </Routes>
