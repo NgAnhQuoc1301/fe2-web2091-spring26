@@ -4,6 +4,7 @@ import { Button, Form, Input } from "antd";
 import Layout, { Content, Footer, Header } from "antd/es/layout/layout";
 import Dashboard from "./dashboard";
 import Lab4 from "./pages/lab4";
+import List from "./pages/List";
 
 function App() {
   const onFinish = (values: any) =>{
@@ -71,7 +72,7 @@ function App() {
             </Form>
           </div>
         } />
-        <Route path="/list" element={<Lab4 />} />
+        <Route path="/list" element={<List />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/add" element={<Lab4 />} />
       </Routes>
