@@ -25,7 +25,6 @@ export default function Lab5() {
     const queryClient = useQueryClient();
     const [searchKeyword, setSearchKeyword] = useState("");
 
-    // Fetch categories
     const { data: categories = [] } = useQuery({
         queryKey: ["categories"],
         queryFn: async () => {
@@ -34,7 +33,6 @@ export default function Lab5() {
         }
     });
 
-    // Fetch stories
     const { data: stories = [] } = useQuery({
         queryKey: ["stories"],
         queryFn: async () => {
@@ -44,14 +42,12 @@ export default function Lab5() {
         }
     });
 
-    // Delete story mutation
     const deleteStory = useMutation({
         mutationFn: async (id: number) => {
             await axios.delete(`http://localhost:3000/stories/${id}`);
         },
         onSuccess: () => {
             toast.success("Xóa truyện thành công");
-            // Bài 4: Reload danh sách sau khi xóa
             queryClient.invalidateQueries({ queryKey: ["stories"] });
         },
         onError: () => {
@@ -59,12 +55,10 @@ export default function Lab5() {
         }
     });
 
-    // Bài 5: Lọc danh sách theo keyword
     const filteredStories = stories.filter((story: Story) =>
         story.title.toLowerCase().includes(searchKeyword.toLowerCase())
     );
 
-    // Bài 1 & 2: Định nghĩa cột
     const columns = [
         {
             title: "ID",
