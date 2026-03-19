@@ -1,7 +1,8 @@
-import { Table, Tabs, Button, Popconfirm, Space, Empty } from "antd";
-import { useQuery, useMutation } from "@tanstack/react-query";
+import { Table, Tabs, Button, Popconfirm, Space, Empty, Input } from "antd";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useState } from "react";
 
 interface Category {
     id: number;
@@ -17,9 +18,13 @@ interface Story {
     image: string;
     description: string;
     categoryId?: number;
+    createdAt?: string;
 }
 
 export default function List() {
+    const queryClient = useQueryClient();
+    const [searchKeyword, setSearchKeyword] = useState("");
+
     // Fetch categories
     const { data: categories = [], refetch: refetchCategories } = useQuery({
         queryKey: ["categories"],
@@ -59,12 +64,17 @@ export default function List() {
         },
         onSuccess: () => {
             toast.success("Xóa truyện thành công");
-            refetchStories();
+            queryClient.invalidateQueries({ queryKey: ["stories"] });
         },
         onError: () => {
             toast.error("Xóa truyện thất bại");
         }
     });
+
+    // Lọc danh sách stories theo keyword
+    const filteredStories = stories.filter((story: Story) =>
+        story.title.toLowerCase().includes(searchKeyword.toLowerCase())
+    );
 
     // Categories columns
     const categoryColumns = [
@@ -140,8 +150,17 @@ export default function List() {
             dataIndex: "categoryId",
             key: "categoryId",
             render: (categoryId: number) => {
-                const category = categories.find(c => c.id === categoryId);
+                const category = categories.find((c: Category) => c.id === categoryId);
                 return category ? category.title : "N/A";
+            }
+        },
+        {
+            title: "Created At",
+            dataIndex: "createdAt",
+            key: "createdAt",
+            render: (date: string) => {
+                if (!date) return "N/A";
+                return new Date(date).toLocaleDateString("vi-VN");
             }
         },
         {
@@ -157,7 +176,7 @@ export default function List() {
                         okText="Xóa"
                         cancelText="Hủy"
                     >
-                        <Button danger size="small">Xóa</Button>
+                        <Button danger size="small" loading={deleteStory.isPending}>Xóa</Button>
                     </Popconfirm>
                 </Space>
             )
@@ -173,16 +192,26 @@ export default function List() {
                 items={[
                     {
                         key: "stories",
-                        label: `Truyện (${stories.length})`,
-                        children: stories.length > 0 ? (
-                            <Table
-                                columns={storyColumns}
-                                dataSource={stories}
-                                rowKey="id"
-                                pagination={{ pageSize: 10 }}
-                            />
-                        ) : (
-                            <Empty description="Chưa có truyện nào" />
+                        label: `Truyện (${filteredStories.length})`,
+                        children: (
+                            <>
+                                <Input
+                                    placeholder="Tìm kiếm theo tên truyện..."
+                                    value={searchKeyword}
+                                    onChange={(e) => setSearchKeyword(e.target.value)}
+                                    style={{ maxWidth: "300px", marginBottom: "20px" }}
+                                />
+                                {filteredStories.length > 0 ? (
+                                    <Table
+                                        columns={storyColumns}
+                                        dataSource={filteredStories}
+                                        rowKey="id"
+                                        pagination={{ pageSize: 5, showTotal: (total) => `Tổng ${total} truyện` }}
+                                    />
+                                ) : (
+                                    <Empty description="Không tìm thấy truyện nào" />
+                                )}
+                            </>
                         )
                     },
                     {

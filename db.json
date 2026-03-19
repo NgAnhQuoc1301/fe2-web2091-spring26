@@ -1,42 +1,70 @@
 {
   "stories": [
     {
-      "title": "nguuu",
-      "author": "bảo toàn",
-      "image": "https://images.unsplash.com/photo-1606312618473-e3c0d3d38be3",
-      "description": "sấdasd",
+      "title": "One Piece",
+      "author": "Eiichiro Oda",
+      "image": "https://images.unsplash.com/photo-1605214174585-fe31582dc368?w=400",
+      "description": "Câu chuyện về Luffy và đội hải tặc Mũ Rơm tìm kiếm kho báu One Piece",
+      "categoryId": 3,
+      "createdAt": "2024-03-19T10:00:00Z",
       "id": 1
     },
     {
-      "title": "nguuu",
-      "author": "bảo toàn",
-      "image": "https://images.unsplash.com/photo-1606312618473-e3c0d3d38be3",
-      "description": "sấdasd",
+      "title": "Naruto",
+      "author": "Masashi Kishimoto",
+      "image": "https://images.unsplash.com/photo-1578926314433-b1904626ba61?w=400",
+      "description": "Cuộc hành trình của cậu bé Naruto trở thành Hokage của làng Leaf",
+      "categoryId": 3,
+      "createdAt": "2024-03-18T09:30:00Z",
       "id": 2
+    },
+    {
+      "title": "Dragon Ball",
+      "author": "Akira Toriyama",
+      "image": "https://images.unsplash.com/photo-1608889335941-32ac5f2041b9?w=400",
+      "description": "Goku và các bạn tìm kiếm Dragon Ball để thực hiện ước mơ",
+      "categoryId": 3,
+      "createdAt": "2024-03-17T14:15:00Z",
+      "id": 3
+    },
+    {
+      "title": "Attack on Titan",
+      "author": "Hajime Isayama",
+      "image": "https://images.unsplash.com/photo-1613395877303-13d7555e8c86?w=400",
+      "description": "Cuộc chiến giữa con người và những titanic khổng lồ",
+      "categoryId": 1,
+      "createdAt": "2024-03-16T11:45:00Z",
+      "id": 4
+    },
+    {
+      "title": "Death Note",
+      "author": "Tsugumi Ohba",
+      "image": "https://images.unsplash.com/photo-1614589268797-fbb3e5a59c90?w=400",
+      "description": "Light Yagami tìm được một quyển vở có sức mạnh siêu nhiên",
+      "categoryId": 1,
+      "createdAt": "2024-03-15T16:20:00Z",
+      "id": 5
+    },
+    {
+      "title": "Fairy Tail",
+      "author": "Hiro Mashima",
+      "image": "https://images.unsplash.com/photo-1509347528160-9a9e33742cdb?w=400",
+      "description": "Nhóm pháp sư Fairy Tail cùng nhau chinh phục những thách thức",
+      "categoryId": 3,
+      "createdAt": "2024-03-14T13:00:00Z",
+      "id": 6
     }
   ],
   "categories": [
     {
-      "title": "truyện kinh dị",
-      "description": "adsdasdas",
-      "id": 1
-    },
-    {
-      "title": "ưqedwqe",
-      "description": "sadasdas",
-      "id": 2
-    },
-    {
-      "title": "gà",
-      "description": "adsadasd",
-      "active": true,
+      "title": "Hành động",
+      "description": "Các truyện hành động",
       "id": 3
     },
     {
-      "title": "ưerfwef",
-      "description": "ưerewr",
-      "active": true,
-      "id": 4
+      "title": "Kinh dị",
+      "description": "Các truyện kinh dị",
+      "id": 1
     }
   ],
   "users": []
