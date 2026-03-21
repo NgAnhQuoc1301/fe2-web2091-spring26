@@ -2,9 +2,10 @@ import { Toaster } from "react-hot-toast";
 import { Link, Routes, Route } from "react-router-dom";
 import { Button, Form, Input } from "antd";
 import Layout, { Content, Footer, Header } from "antd/es/layout/layout";
-import Dashboard from "./dashboard";
-import Lab4 from "./pages/lab4";
+import Dashboard from "./Dashboard";
+import Lab4 from "./pages/Lab4";
 import List from "./pages/List";
+import EditStory from "./pages/edit";
 
 function App() {
   const onFinish = (values: any) =>{
@@ -75,6 +76,7 @@ function App() {
         <Route path="/list" element={<List />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/add" element={<Lab4 />} />
+        <Route path="/edit/:id" element={<EditStory/>}/>
       </Routes>
 
       <Toaster />

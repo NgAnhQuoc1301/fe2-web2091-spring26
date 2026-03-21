@@ -1,150 +1,56 @@
-import { Table, Button, Popconfirm, Space, Input, Empty, message } from "antd";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { Form, Input, Button } from "antd";
+import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { useState } from "react";
 
-interface Story {
-    id: number;
-    title: string;
-    author: string;
-    image: string;
-    description: string;
-    categoryId?: number;
-    createdAt?: string;
-}
+const StoryForm = () => {
+  const mutation = useMutation({
+    mutationFn: async (data: any) => {
+      const res = await axios.post("http://localhost:3000/stories", data);
 
-interface Category {
-    id: number;
-    title: string;
-    description: string;
-    active?: boolean;
-}
+      return res.data;
+    },
 
-export default function Lab5() {
-    const queryClient = useQueryClient();
-    const [searchKeyword, setSearchKeyword] = useState("");
+    onSuccess: () => {
+      toast.success("Thêm truyện thành công");
+    },
 
-    const { data: categories = [] } = useQuery({
-        queryKey: ["categories"],
-        queryFn: async () => {
-            const response = await axios.get("http://localhost:3000/categories");
-            return response.data;
-        }
-    });
+    onError: () => {
+      toast.error("Có lỗi xảy ra");
+    },
+  });
 
-    const { data: stories = [] } = useQuery({
-        queryKey: ["stories"],
-        queryFn: async () => {
-            const response = await axios.get("http://localhost:3000/stories");
-            console.log("Stories fetched:", response.data);
-            return response.data;
-        }
-    });
+  const onFinish = (values: any) => {
+    mutation.mutate(values);
+  };
 
-    const deleteStory = useMutation({
-        mutationFn: async (id: number) => {
-            await axios.delete(`http://localhost:3000/stories/${id}`);
-        },
-        onSuccess: () => {
-            toast.success("Xóa truyện thành công");
-            queryClient.invalidateQueries({ queryKey: ["stories"] });
-        },
-        onError: () => {
-            toast.error("Xóa truyện thất bại");
-        }
-    });
+  return (
+    <Form layout="vertical" onFinish={onFinish} style={{ maxWidth: 500 }}>
+      <Form.Item
+        label="Tên truyện"
+        name="title"
+        rules={[{ required: true, message: "Nhập tên truyện" }]}
+      >
+        <Input />
+      </Form.Item>
 
-    const filteredStories = stories.filter((story: Story) =>
-        story.title.toLowerCase().includes(searchKeyword.toLowerCase())
-    );
+      <Form.Item label="Tác giả" name="author">
+        <Input />
+      </Form.Item>
 
-    const columns = [
-        {
-            title: "ID",
-            dataIndex: "id",
-            key: "id",
-            width: 60
-        },
-        {
-            title: "Tên truyện",
-            dataIndex: "title",
-            key: "title"
-        },
-        {
-            title: "Tác giả",
-            dataIndex: "author",
-            key: "author"
-        },
-        {
-            title: "Mô tả",
-            dataIndex: "description",
-            key: "description",
-            ellipsis: true
-        },
-        {
-            title: "Danh mục",
-            dataIndex: "categoryId",
-            key: "categoryId",
-            render: (categoryId: number) => {
-                const category = categories.find((c: Category) => c.id === categoryId);
-                return category ? category.title : "N/A";
-            }
-        },
-        {
-            title: "Created At",
-            dataIndex: "createdAt",
-            key: "createdAt",
-            render: (date: string) => {
-                if (!date) return "N/A";
-                return new Date(date).toLocaleDateString("vi-VN");
-            }
-        },
-        {
-            title: "Action",
-            key: "action",
-            width: 150,
-            render: (_: any, record: Story) => (
-                <Space>
-                    <Popconfirm
-                        title="Xóa truyện?"
-                        description="Bạn chắc chắn muốn xóa truyện này?"
-                        onConfirm={() => deleteStory.mutate(record.id)}
-                        okText="Xóa"
-                        cancelText="Hủy"
-                    >
-                        <Button danger size="small" loading={deleteStory.isPending}>
-                            Xóa
-                        </Button>
-                    </Popconfirm>
-                </Space>
-            )
-        }
-    ];
+      <Form.Item label="Image URL" name="image">
+        <Input />
+      </Form.Item>
 
-    return (
-        <div style={{ padding: "20px" }}>
-            <h1>Danh sách truyện</h1>
+      <Form.Item label="Mô tả" name="description">
+        <Input.TextArea rows={4} />
+      </Form.Item>
 
-            <div style={{ marginBottom: "20px" }}>
-                <Input
-                    placeholder="Tìm kiếm theo tên truyện..."
-                    value={searchKeyword}
-                    onChange={(e) => setSearchKeyword(e.target.value)}
-                    style={{ maxWidth: "300px" }}
-                />
-            </div>
+      <Button type="primary" htmlType="submit" loading={mutation.isPending}>
+        Thêm truyện
+      </Button>
+    </Form>
+  );
+};
 
-            {filteredStories.length > 0 ? (
-                <Table
-                    columns={columns}
-                    dataSource={filteredStories}
-                    rowKey="id"
-                    pagination={{ pageSize: 5, showTotal: (total) => `Tổng ${total} truyện` }}
-                />
-            ) : (
-                <Empty description="Không tìm thấy truyện nào" />
-            )}
-        </div>
-    );
-}
+export default StoryForm;
