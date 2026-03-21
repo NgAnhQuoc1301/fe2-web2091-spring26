@@ -23,7 +23,6 @@ const StoryForm = () => {
   const onFinish = (values: any) => {
     mutation.mutate(values);
   };
-
   return (
     <Form layout="vertical" onFinish={onFinish} style={{ maxWidth: 500 }}>
       <Form.Item
